@@ -6,7 +6,7 @@
 //#define _DEBUG 1
 
 #define PROJECT "ESP12Clock"
-#define VERSION "1.0"
+#define VERSION "1.1"
 
 #define NTP_SERVER "192.168.0.60"
 #include <MyArduino.h>
@@ -114,14 +114,6 @@ void loop() {
         if (!isNoWiFi) showNoWiFi(isNoWiFi = true);
     }
 
-    // DEF_TMENEGMENT;
-    // IF_TMENEGMENT(6000) {
-    //     static uint32_t testMin = 0;
-    //     setTime(1609354797 + testMin*60UL ); 
-    //     testMin++;
-    //     PASS_TMENEGMENT;
-    // }
-
     if (IS_REAL_TIME(now())){
         const uint32_t t = millis();
         if (t > timeToInvertDelimit){            
@@ -138,7 +130,7 @@ void loop() {
     }
     else if (WiFi.status() != WL_CONNECTED) upWiFi();
 
-    lightSense.run(display);
+    //lightSense.run(display);
 
     keyDriver.listenKeys(); 
 	if (keyDriver.isKeyPressed()) {

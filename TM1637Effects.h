@@ -229,11 +229,10 @@ bool goAnimation(int8_t animation, const uint8_t *data){
 }
 
 void showClockData(bool isShowDelimit, bool isShowNoWifi){
-    const uint8_t data[] = {display.encodeDigit(hour()/10), display.encodeDigit(hour()%10), display.encodeDigit(minute()/10), display.encodeDigit(minute()%10)};
+    const uint8_t data[] = {((hour() < 10 ) ? 0 : display.encodeDigit(hour()/10)), display.encodeDigit(hour()%10), display.encodeDigit(minute()/10), display.encodeDigit(minute()%10)};
 	goAnimation((minute() == 0) ? 2 : -1, data);
     fillSegments( data );
     if (isShowDelimit) dataClock[1] |= SEG_DP; else dataClock[1] &= ~SEG_DP;
-    if (hour() == 0) dataClock[0] = 0;
 	if (isShowNoWifi) dataClock[0] |= SEG_DP; else dataClock[0] &= ~SEG_DP;
     display.setSegments(dataClock);
 }
